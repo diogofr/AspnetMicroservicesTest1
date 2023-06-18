@@ -1,3 +1,5 @@
+using Basket.API.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,7 +11,8 @@ builder.Services.AddSwaggerGen();
 var services = builder.Services;
 IConfiguration configuration = builder.Configuration;
 services.AddStackExchangeRedisCache(options => options.Configuration = configuration.GetValue<string>("CacheSettings:ConnectionString"));
-
+services.AddScoped<IBasketRepository, BasketRepository>();
+ 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
