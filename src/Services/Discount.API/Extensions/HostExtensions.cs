@@ -50,7 +50,7 @@ namespace Discount.API.Extensions
                 {
                     logger.LogError(ex, "An error occurred while migrating the postgresql database");
                     
-                    if (retryForAvailability > 50)
+                    if (retryForAvailability < 50)
                     {
                         retryForAvailability++;
                         Thread.Sleep(2000);
