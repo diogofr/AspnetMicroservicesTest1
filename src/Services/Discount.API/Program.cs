@@ -1,3 +1,4 @@
+using Discount.API.Extensions;
 using Discount.API.Repositories;
 
 namespace Discount.API
@@ -5,6 +6,27 @@ namespace Discount.API
     public class Program
     {
         public static void Main(string[] args)
+        {
+            var builder = CreateHostBuilder(args);
+
+            var app = builder.Build();
+
+            app.MigrateDatabase<Program>();
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseAuthorization();
+            app.MapControllers();
+
+            app.Run();
+        }
+
+        public static WebApplicationBuilder CreateHostBuilder(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -18,21 +40,7 @@ namespace Discount.API
 
             services.AddScoped<IDiscountRepository, DiscountRepository>();
 
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
+            return builder;
         }
     }
 }
