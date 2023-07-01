@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.OpenApi.Writers;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Npgsql;
 
-namespace Discount.API.Extensions
+namespace Discount.Common.Extensions
 {
     public static class HostExtensions
     {
@@ -49,7 +51,7 @@ namespace Discount.API.Extensions
                 catch (NpgsqlException ex)
                 {
                     logger.LogError(ex, "An error occurred while migrating the postgresql database");
-                    
+
                     if (retryForAvailability < 50)
                     {
                         retryForAvailability++;

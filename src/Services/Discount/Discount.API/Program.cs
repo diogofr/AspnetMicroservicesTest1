@@ -1,5 +1,5 @@
-using Discount.API.Extensions;
-using Discount.API.Repositories;
+using Discount.Common.Extensions;
+using Discount.Common.Repositories;
 
 namespace Discount.API
 {
