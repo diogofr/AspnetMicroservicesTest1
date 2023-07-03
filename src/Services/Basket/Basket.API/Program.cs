@@ -18,7 +18,7 @@ IConfiguration configuration = builder.Configuration;
 services.AddStackExchangeRedisCache(options => options.Configuration = configuration.GetValue<string>("CacheSettings:ConnectionString"));
 services.AddScoped<IBasketRepository, BasketRepository>();
 
-services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(o => o.Address = new Uri(configuration["GprcSettings:DiscountUrl"]));
+services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(o => o.Address = new Uri(configuration["GrpcSettings:DiscountUrl"]));
 services.AddScoped<DiscountGrpcService>();
  
 
